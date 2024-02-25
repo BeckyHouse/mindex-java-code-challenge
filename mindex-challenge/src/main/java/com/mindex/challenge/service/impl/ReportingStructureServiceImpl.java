@@ -4,6 +4,7 @@ import com.mindex.challenge.data.Employee;
 import com.mindex.challenge.data.ReportingStructure;
 import com.mindex.challenge.service.EmployeeService;
 import com.mindex.challenge.service.ReportingStructureService;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,7 @@ public class ReportingStructureServiceImpl implements ReportingStructureService 
     @Override
     public ResponseEntity<ReportingStructure> numberOfEmployeeReports(String employeeId) {
 
-        if (employeeId != null) {
+        if (!StringUtils.isBlank(employeeId)) {
             Employee employee = this.employeeService.read(employeeId);
             List<Employee> reportsList = new ArrayList<>();
             this.directReports(employee, reportsList);
